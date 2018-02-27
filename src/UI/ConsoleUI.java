@@ -1,10 +1,9 @@
 package UI;
 
-import java.io.Console;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class TUI implements IUI {
+public class ConsoleUI implements IConsoleUI {
 
 	Scanner sc = new Scanner(System.in);
 	@Override

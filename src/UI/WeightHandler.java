@@ -72,7 +72,7 @@ public class WeightHandler implements IWeightHandler{
             OutputStream sos = socket.getOutputStream();
             PrintWriter pw = new PrintWriter(sos);
 
-            pw.println("");
+            pw.println("D \"ERROR\"");
             pw.flush();
 
             //socket.close();
@@ -86,27 +86,107 @@ public class WeightHandler implements IWeightHandler{
     }
 
     @Override
-    public void showText() {
+    public void showText(String msg) {
+        try (Socket socket = new Socket(curIP, 8000)) {
+            OutputStream sos = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(sos);
 
+            pw.println("P111 \"" + msg +"\"");
+            pw.flush();
+
+            //socket.close();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void clearText() {
+        try (Socket socket = new Socket(curIP, 8000)) {
+            OutputStream sos = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(sos);
 
+            pw.println("DW");
+            pw.flush();
+
+            //socket.close();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void getInput() {
+    public String getInput(String msg) {
+        try (Socket socket = new Socket( curIP ,8000)) {
+            OutputStream sos = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(sos);
+            InputStream is = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String in = "         ";
 
+            pw.println("RM20 8 \""+msg+"\" \" \" \"&3\"");
+            pw.flush();
+
+            while(!in.substring(0,6).equals("RM20 A")){
+                in = reader.readLine();
+            }
+
+            String subStr = in.substring(8,in.length()-1);
+            return subStr;
+            //socket.close();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return "";
     }
 
     @Override
-    public void overrideWeight() {
+    public void overrideWeight(int grams) {
+        try (Socket socket = new Socket(curIP, 8000)) {
+            OutputStream sos = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(sos);
 
+            pw.println("B \""+grams+"\"");
+            pw.flush();
+
+            //socket.close();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void exit() {
+        try (Socket socket = new Socket(curIP, 8000)) {
+            OutputStream sos = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(sos);
 
+            pw.println("Q");
+            pw.flush();
+
+            //socket.close();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package UI;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -35,7 +36,6 @@ public class WeightHandler implements IWeightHandler{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return 0;
     }
 

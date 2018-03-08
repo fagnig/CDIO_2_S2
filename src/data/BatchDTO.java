@@ -22,6 +22,16 @@ public class BatchDTO implements Serializable {
     }
     public void setBatchName(String batchName) { this.batchName = batchName; }
 
+    public void setBatchWeight(int weight){this.weight = weight;}
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setBatchTolerance(int tolerance){ this.tolerance = tolerance;}
+
+    public int getTolerance() { return tolerance; }
+
     @Override
     public String toString() {
         return "BatchDTO [batchId=" + batchID + ", batchName=" + batchName + "]";

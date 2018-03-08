@@ -5,14 +5,15 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class WeightHandler implements IWeightHandler{
+    String curIP;
     public WeightHandler(){
-
+        curIP = "localhost"; //TODO make ip dynamic
     }
 
 
     @Override
     public int getWeight() {
-        try (Socket socket = new Socket("localhost", 8000)) {
+        try (Socket socket = new Socket( curIP ,8000)) {
             OutputStream sos = socket.getOutputStream();
             PrintWriter pw = new PrintWriter(sos);
             InputStream is = socket.getInputStream();
@@ -40,13 +41,13 @@ public class WeightHandler implements IWeightHandler{
 
     @Override
     public int tare() {
-        try (Socket socket = new Socket("localhost", 8000)) {
+        try (Socket socket = new Socket(curIP, 8000)) {
             OutputStream sos = socket.getOutputStream();
             PrintWriter pw = new PrintWriter(sos);
             InputStream is = socket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
-            pw.println("S");
+            pw.println("T");
             pw.flush();
             String in = reader.readLine();
 
@@ -68,18 +69,12 @@ public class WeightHandler implements IWeightHandler{
 
     @Override
     public void showError() {
-        try (Socket socket = new Socket("localhost", 8000)) {
+        try (Socket socket = new Socket(curIP, 8000)) {
             OutputStream sos = socket.getOutputStream();
             PrintWriter pw = new PrintWriter(sos);
-            InputStream is = socket.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
-            pw.println("S");
+            pw.println("");
             pw.flush();
-            String in = reader.readLine();
-
-            String subStr = in.substring(in.length()-7,in.length()-2);
-            String subStr2 = subStr.charAt(0) + subStr.substring(2);
 
             //socket.close();
         } catch (UnknownHostException e) {

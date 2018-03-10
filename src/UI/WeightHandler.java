@@ -153,6 +153,41 @@ public class WeightHandler implements IWeightHandler{
     }
 
     @Override
+    public boolean getConfirmation(String msg) {
+        try (Socket socket = new Socket( curIP ,8000)) {
+            OutputStream sos = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(sos);
+            InputStream is = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String in = "         ";
+
+            pw.println("K 3 ");
+            pw.flush();
+
+            while(!in.substring(0,5).equals("K C 4")){
+                in = reader.readLine();
+                //System.out.println(in);
+                if(in.equals("CANCEL CASE GOES HERE")){
+                    return false;
+                }
+            }
+
+            pw.print("K 1 ");
+            pw.flush();
+
+            return true;
+            //socket.close();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
     public void overrideWeight(int grams) {
         try (Socket socket = new Socket(curIP, 8000)) {
             OutputStream sos = socket.getOutputStream();

@@ -14,7 +14,7 @@ public class BatchDAO implements IBatchDAO {
         tempBatch.setBatchID(1234);
         tempBatch.setBatchName("Salt");
         tempBatch.setBatchTolerance(50);
-        tempBatch.setBatchWeight(1500);
+        tempBatch.setBatchWeight(750);
 
         try {
             createBatch(tempBatch);

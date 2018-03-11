@@ -3,6 +3,7 @@ package UI;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.concurrent.TimeUnit;
 
 public class WeightHandler implements IWeightHandler{
     String curIP;
@@ -161,6 +162,8 @@ public class WeightHandler implements IWeightHandler{
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String in = "         ";
 
+            pw.println(msg);
+            pw.flush();
             pw.println("K 3 ");
             pw.flush();
 
@@ -172,9 +175,10 @@ public class WeightHandler implements IWeightHandler{
                 }
             }
 
-            pw.print("K 1 ");
+            pw.println("K 1 ");
             pw.flush();
-
+            pw.println("DW");
+            pw.flush();
             return true;
             //socket.close();
         } catch (UnknownHostException e) {
@@ -221,6 +225,15 @@ public class WeightHandler implements IWeightHandler{
             e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void sleep(int s) {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

@@ -111,6 +111,8 @@ public class Main {
             brutWeight = wh.getWeight();
             ui.showMessage("Brutweight:"+brutWeight);
 
+            ui.showMessage("Weight difference from expected: " + Math.abs(Math.abs(brutWeight)-(netWeight+taraWeight)));
+            ui.showMessage("Errortolerance: " + curBatch.getTolerance());
             if(Math.abs(Math.abs(brutWeight)-(netWeight+taraWeight)) > curBatch.getTolerance()){
                 wh.haltProgress("Ikke godkendt");
             } else {

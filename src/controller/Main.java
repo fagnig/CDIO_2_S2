@@ -1,15 +1,15 @@
 package controller;
 
-import UI.WeightHandler;
+import UI.*;
 import data.*;
 
 public class Main {
     public static void main(String[] args) {
-        WeightHandler meme = new WeightHandler();
+        IWeightHandler meme = new WeightHandler();
         go(meme, new UserDAO(), new BatchDAO());
     }
 
-    private static void go(WeightHandler wh, UserDAO user, BatchDAO batch){
+    private static void go(IWeightHandler wh, IUserDAO user, IBatchDAO batch){
         int taraWeight;
         int netWeight;
         int brutWeight;
@@ -48,9 +48,9 @@ public class Main {
             wh.showText("Velkommen "+ curOp.getUserName());
             wh.sleep(3);
             wh.clearText();
-            if(!wh.getConfirmation("Er brugeren korrekt?")){
-                break;
-            }
+            //if(!wh.getConfirmation("Er brugeren korrekt?")){
+            //    break;
+            //}
 
             //Batchentry
             int batchNo = 0;
@@ -85,18 +85,18 @@ public class Main {
             }
 
             //tara registration
-            wh.getConfirmation("Fjern alt fra vaegt");
+            wh.haltProgress("Fjern alt fra vaegt");
             wh.tare();
-            wh.getConfirmation("Placer tara");
+            wh.haltProgress("Placer tara");
             taraWeight = wh.tare();
 
             //weight registration
-            wh.getConfirmation("Placer "+ curBatch.getWeight()+"g "+curBatch.getBatchName());
+            wh.haltProgress("Placer "+ curBatch.getWeight()+"g "+curBatch.getBatchName());
             netWeight = wh.getWeight();
 
             wh.tare();
 
-            wh.getConfirmation("Fjern alt");
+            wh.haltProgress("Fjern alt");
             brutWeight = wh.getWeight();
 
             if(Math.abs(Math.abs(brutWeight)-(netWeight+taraWeight)) > curBatch.getTolerance()){

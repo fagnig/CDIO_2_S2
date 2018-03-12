@@ -11,6 +11,7 @@ public interface IWeightHandler {
     void clearText();
     String getInput(String msg);
     boolean getConfirmation(String msg);
+    void haltProgress(String msg);
 
     //Exclusively for testing with the emulator
     void overrideWeight(int grams);

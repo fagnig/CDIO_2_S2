@@ -162,6 +162,75 @@ public class WeightHandler implements IWeightHandler{
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String in = "         ";
 
+            pw.println("RM20 8 \""+msg+"\" \" \" \"&3\"");
+            pw.flush();
+
+            while(!in.substring(0,6).equals("RM20 A")){
+                in = reader.readLine();
+            }
+
+            String subStr = in.substring(8,in.length()-1);
+
+            while(!subStr.equals("Y")){
+                in = reader.readLine();
+                if(in.equals("N")){
+                    return false;
+                }
+            }
+
+            pw.println("DW");
+            pw.flush();
+
+            return true;
+            //socket.close();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public void haltProgress(String msg) {
+        try (Socket socket = new Socket( curIP ,8000)) {
+            OutputStream sos = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(sos);
+            InputStream is = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String in = "         ";
+
+            pw.println("P111 \"" + msg + "\"");
+            pw.flush();
+
+            while (!in.substring(0, 3).equals("K A")) {
+                in = reader.readLine();
+            }
+
+            pw.println("DW");
+            pw.flush();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+
+    /* //K 3 implementation
+    @Override
+    public boolean getConfirmation(String msg) {
+        try (Socket socket = new Socket( curIP ,8000)) {
+            OutputStream sos = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(sos);
+            InputStream is = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String in = "         ";
+
             pw.println(msg);
             pw.flush();
             pw.println("K 3 ");
@@ -190,7 +259,7 @@ public class WeightHandler implements IWeightHandler{
         }
         return false;
     }
-
+    */
     @Override
     public void overrideWeight(int grams) {
         try (Socket socket = new Socket(curIP, 8000)) {

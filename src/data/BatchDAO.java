@@ -13,7 +13,7 @@ public class BatchDAO implements IBatchDAO {
         BatchDTO tempBatch = new BatchDTO(); //Hardcoded batch as given in the problem description
         tempBatch.setBatchID(1234);
         tempBatch.setBatchName("Salt");
-        tempBatch.setBatchTolerance(50);
+        tempBatch.setBatchTolerance(150);
         tempBatch.setBatchWeight(750);
 
         try {

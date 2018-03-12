@@ -48,9 +48,9 @@ public class Main {
             wh.showText("Velkommen "+ curOp.getUserName());
             wh.sleep(3);
             wh.clearText();
-            //if(!wh.getConfirmation("Er brugeren korrekt?")){
-            //    break;
-            //}
+            if(!wh.getConfirmation("Er brugeren korrekt?")){
+                break;
+            }
 
             //Batchentry
             int batchNo = 0;

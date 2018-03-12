@@ -86,7 +86,7 @@ public class WeightHandler implements IWeightHandler{
     }
 
     @Override
-    public void showText() {
+    public void showText(String msg) {
 
     }
 
@@ -96,7 +96,7 @@ public class WeightHandler implements IWeightHandler{
     }
 
     @Override
-    public void getInput() {
+    public void getInput(String msg) {
 
     }
 

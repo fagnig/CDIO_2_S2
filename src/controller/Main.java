@@ -16,7 +16,10 @@ public class Main {
         boolean isRunning = true;
 
         while(isRunning){
-            int opNo = 0;
+            taraWeight = 0;
+            netWeight = 0;
+            brutWeight = 0;
+            int opNo;
             boolean hasValidOp = false;
             UserDTO curOp = null;
 

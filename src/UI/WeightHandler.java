@@ -72,7 +72,7 @@ public class WeightHandler implements IWeightHandler{
             OutputStream sos = socket.getOutputStream();
             PrintWriter pw = new PrintWriter(sos);
 
-            pw.println("");
+            pw.println("D \"Error\"");
             pw.flush();
 
             //socket.close();

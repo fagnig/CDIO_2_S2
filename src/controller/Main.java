@@ -15,6 +15,8 @@ public class Main {
         int brutWeight;
         boolean isRunning = true;
 
+        IConsoleUI ui = new ConsoleUI();
+
         while(isRunning){
             taraWeight = 0;
             netWeight = 0;
@@ -33,6 +35,7 @@ public class Main {
                 if(opNo < 11 || opNo > 99){
                     wh.showError();
                     wh.showText("Ugyldigt operatornr.");
+                    ui.showMessage("OpNo out of domain [11;99] was:"+opNo);
                     wh.sleep(3);
                     wh.clearText();
                     break;
@@ -44,6 +47,7 @@ public class Main {
                 } catch (DALException e) {
                     wh.showError();
                     wh.showText("Ugyldigt operatornr.");
+                    ui.showMessage("Operator does not exist:"+opNo);
                     wh.sleep(3);
                     wh.clearText();
                 }
@@ -67,6 +71,7 @@ public class Main {
                 if(batchNo < 1000 || batchNo > 9999){
                     wh.showError();
                     wh.showText("Ugyldigt batchnr.");
+                    ui.showMessage("OpNo out of domain [1000;9999] was:"+batchNo);
                     wh.sleep(3);
                     wh.clearText();
                     break;
@@ -78,6 +83,7 @@ public class Main {
                 } catch (DALException e) {
                     wh.showError();
                     wh.showText("Ugyldigt batchnr.");
+                    ui.showMessage("Batch does not exist:"+batchNo);
                     wh.sleep(3);
                     wh.clearText();
                 }
@@ -93,15 +99,17 @@ public class Main {
             wh.tare();
             wh.haltProgress("Placer tara");
             taraWeight = wh.tare();
+            ui.showMessage("Taraweight:"+taraWeight);
 
             //weight registration
             wh.haltProgress("Placer "+ curBatch.getWeight()+"g "+curBatch.getBatchName());
             netWeight = wh.getWeight();
-
+            ui.showMessage("Netweight:"+netWeight);
             wh.tare();
 
             wh.haltProgress("Fjern alt");
             brutWeight = wh.getWeight();
+            ui.showMessage("Brutweight:"+brutWeight);
 
             if(Math.abs(Math.abs(brutWeight)-(netWeight+taraWeight)) > curBatch.getTolerance()){
                 wh.haltProgress("Ikke godkendt");

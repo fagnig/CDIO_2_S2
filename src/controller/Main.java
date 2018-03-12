@@ -22,6 +22,7 @@ public class Main {
 
             wh.clearText();
             wh.tare();
+            wh.haltProgress("Vaegt klar");
 
             while(!hasValidOp){
                 String tmp = wh.getInput("Indtast operatornr:");
@@ -100,12 +101,11 @@ public class Main {
             brutWeight = wh.getWeight();
 
             if(Math.abs(Math.abs(brutWeight)-(netWeight+taraWeight)) > curBatch.getTolerance()){
-                wh.showText("Ikke godkendt");
+                wh.haltProgress("Ikke godkendt");
             } else {
-                wh.showText("Godkendt");
+                wh.haltProgress("Godkendt");
             }
-
-            isRunning = wh.getConfirmation("Vej mere?");
+            //isRunning = wh.getConfirmation("Vej mere?");
         }
     }
 }

@@ -11,14 +11,14 @@ public class UserDAO implements IUserDAO{
     public UserDAO(){
         userList = new ArrayList<UserDTO>();
 
-        UserDTO tempUser = new UserDTO();
+        UserDTO tempUser = new UserDTO(); //Hardcoded user as given in the problem description
         tempUser.setUserId(12);
         tempUser.setUserName("Anders And");
 
         try {
             createUser(tempUser);
         } catch(DALException e){
-            System.out.println("Noget er gået galt, geninstaller programmet.");
+            System.out.println(e.getMessage());
         }
     }
 

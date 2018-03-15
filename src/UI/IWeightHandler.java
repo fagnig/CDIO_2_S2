@@ -1,13 +1,21 @@
 package UI;
 
 public interface IWeightHandler {
+    //Needs some sort of socket interfacing
+    //See CDIO2Ref->socket package
+
     int getWeight();
     int tare();
     void showError();
-    void showText();
+    void showText(String msg);
     void clearText();
-    void getInput();
+    String getInput(String msg);
+    boolean getConfirmation(String msg);
+    void haltProgress(String msg);
 
-    void overrideWeight();
+    //Exclusively for testing with the emulator
+    void overrideWeight(int grams);
     void exit();
+
+    void sleep(int s);
 }
